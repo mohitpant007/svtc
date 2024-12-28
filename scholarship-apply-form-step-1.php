@@ -6,7 +6,7 @@ $db = Instances::get('DB');
 $table = 'tbl_schollarship_part_1';
 if(isset($_SESSION['svtc_user_detais']['id'])){
   $applicationId = $_SESSION['svtc_user_detais']['id'];
-  $getApplicantDetails = $db->query("SELECT * FROM $table where application_id='{$applicationId}'");
+  $getApplicantDetails = $db->query("SELECT * FROM $table where user_id=$applicationId");
   if(empty($getApplicantDetails)){
     $getApplicantDetails[0]=[];
   }
@@ -70,6 +70,7 @@ if(isset($_SESSION['svtc_user_detais']['id'])){
     ?>
     <script>
       const single_parent = "<?php echo getFilledDetails($getApplicantDetails[0], 'single_parent');?>";
-
+      const is_pg_hostel = "<?php echo getFilledDetails($getApplicantDetails[0], 'is_staying_hostel_pg');?>";
+      const same_address = "<?php echo getFilledDetails($getApplicantDetails[0], 'is_same_address');?>";
       </script>
   

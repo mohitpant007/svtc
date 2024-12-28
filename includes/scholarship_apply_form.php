@@ -14,7 +14,7 @@
             </div>
             <div class="mb-3">
                 <label for="phone" class="form-label">Mobile No. <span class="required">*</span></label>
-                <input type="text" class="form-control" name="phone" value="<?php echo getDetail($_SESSION['svtc_user_detais'], 'mobile'); ?>" readonly required>
+                <input type="text" class="form-control" name="phone" value="<?php echo getDetail($_SESSION['svtc_user_detais'], 'mobile'); ?>" readonly>
             </div>
             <div class="mb-3">
                 <label for="dob" class="form-label">Date of Birth <span class="required">*</span></label>
@@ -41,62 +41,11 @@
                     <div class="col-md-12">
                       <div class="row"> 
                       <div class="input-group col-md-6 calender-width">
-                      <input type="text" value="<?php echo date('Y-m-d');?>" id="datepicker" class="form-control" aria-label="Date Input">
+                      <input type="text" name="dob" value="<?php echo getdobDetails($getApplicantDetails[0], 'dob');?>" id="datepicker" class="form-control" aria-label="Date Input">
                      <span class="input-group-text"><i class="fa fa-calendar" id="open-calendar"></i></span>
                    </div>
-                     <!-- <div class="col-md-6"> <input type="text" id="datepicker" class="form-control" readonly></div>  
-                     <div class="col-md-6"><i class="fa fa-calendar calender-icon" aria-hidden="true" id="open-calendar"></i></div> 
-                     </div>    -->
                     
-                        <!-- <label for="dob-month" class="form-label">Month</label> -->
-                        <!-- <select class="form-select" id="dob-month" name="dob-month" required>
-                            <?php if(!empty($getApplicantDetails[0])){?>
-                            <option value="" selected disabled>Month</option>
-                            <option value="1" <?php echo   getdobDetails($getApplicantDetails[0], 'dob')[1] == 1 ? 'selected' : ''; ?>>January</option>
-                            <option value="2" <?php echo   getdobDetails($getApplicantDetails[0], 'dob')[1] == 2 ? 'selected' : ''; ?>>February</option>
-                            <option value="3" <?php echo   getdobDetails($getApplicantDetails[0], 'dob')[1] == 3 ? 'selected' : ''; ?>>March</option>
-                            <option value="4" <?php echo   getdobDetails($getApplicantDetails[0], 'dob')[1] == 4 ? 'selected' : ''; ?>>April</option>
-                            <option value="5" <?php echo   getdobDetails($getApplicantDetails[0], 'dob')[1] == 5 ? 'selected' : ''; ?>>May</option>
-                            <option value="6" <?php echo   getdobDetails($getApplicantDetails[0], 'dob')[1] == 6 ? 'selected' : ''; ?>>June</option>
-                            <option value="7" <?php echo   getdobDetails($getApplicantDetails[0], 'dob')[1] == 7 ? 'selected' : ''; ?>>July</option>
-                            <option value="8" <?php echo   getdobDetails($getApplicantDetails[0], 'dob')[1] == 8 ? 'selected' : ''; ?>>August</option>
-                            <option value="9" <?php echo   getdobDetails($getApplicantDetails[0], 'dob')[1] == 9 ? 'selected' : ''; ?>>September</option>
-                            <option value="10" <?php echo   getdobDetails($getApplicantDetails[0], 'dob')[1] == 10 ? 'selected' : ''; ?>>October</option>
-                            <option value="11" <?php echo   getdobDetails($getApplicantDetails[0], 'dob')[1] == 11 ? 'selected' : ''; ?>>November</option>
-                            <option value="12" <?php echo   getdobDetails($getApplicantDetails[0], 'dob')[1] == 12 ? 'selected' : ''; ?>>December</option>
-                            <?php } else {?>
-                                <option value="" selected disabled>Month</option>
-                            <option value="1" >January</option>
-                            <option value="2" >February</option>
-                            <option value="3" >March</option>
-                            <option value="4" >April</option>
-                            <option value="5" >May</option>
-                            <option value="6" >June</option>
-                            <option value="7" >July</option>
-                            <option value="8" >August</option>
-                            <option value="9" >September</option>
-                            <option value="10" >October</option>
-                            <option value="11" >November</option>
-                            <option value="12">December</option>
-                            <?php } ?>
-                        </select>
                     </div>
-                    <div class="col-md-4">
-                 <label for="dob-year" class="form-label">Year</label> 
-                        <select class="form-select" id="dob-year" name="dob-year" required>
-                            <option value="" selected disabled>Year</option>
-                            Loop to generate options 
-                            <?php
-                            if(!empty($getApplicantDetails[0])){
-                            for ($i = date('Y'); $i >= 1900; $i--) { ?>
-                                <option value="<?php echo $i; ?>" <?php echo $i == getdobDetails($getApplicantDetails[0], 'dob')[0] ? 'selected' : ''; ?>><?php echo $i; ?></option>
-                            <?php }} else {
-                                for ($i = date('Y'); $i >= 1900; $i--) { ?>
-                                    <option value="<?php echo $i; ?>" ><?php echo $i; ?></option>
-                                <?php }}?>
-                            </script>
-                        </select>
-                    </div> -->
                 </div>
                 <!-- <label for="dob" class="form-label">Date of Birth</label>
                 <input type="date" class="form-control" name="dob" required> -->
@@ -112,58 +61,81 @@
             </div>
             <div class="mb-2 mt-2">
                 <label for="gender" class="form-label">Select Marital Status <span class="required">*</span></label>
-                <select class="form-select" name="gender" required>
+                <select class="form-select" name="marital_status" required>
                     <option value="">Select</option>
-                    <option value="married" >Married</option>
-                    <option value="unmarried" >Unmarried</option>
+                    <option value="married" <?php echo getFilledDetails($getApplicantDetails[0], 'marital_status') == 'married' ? 'selected' : ''; ?>>Married</option>
+                    <option value="unmarried" <?php echo getFilledDetails($getApplicantDetails[0], 'marital_status') == 'unmarried' ? 'selected' : ''; ?>>Unmarried</option>
                    
                 </select>
             </div>
             <div class="mb-2 mt-2">
-                <label for="gender" class="form-label">Country / State <span class="required">*</span></label>
                 <div class="row">
                     <div class="col-md-6">
-                        <select class="form-select" name="gender" required>
-                            <option value="">Select Country</option>
+                    <label for="gender" class="form-label">Country<span class="required">*</span></label>
+                        <select class="form-select" name="country" required disabled="disabled">
+                            <!-- <option value="">Select Country</option> -->
                             <option value="India" >India</option>
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <select class="form-select" name="gender" required>
+                    <label for="gender" class="form-label">State<span class="required">*</span></label>
+                        <select class="form-select" name="state" required>
                             <option value="">Select State</option>
                             <?php foreach(ALL_STATES as $state):?>
-                                <option value="<?php echo $state;?>"><?php echo $state;?></option>
+                                <option value="<?php echo $state;?>" <?php echo getFilledDetails($getApplicantDetails[0], 'state') == $state ? 'selected' : ''; ?>><?php echo $state;?></option>
                             <?php endforeach;?>
                         </select>
                     </div>
                 </div>
             </div>
             <div class="mb-3 mt-3">
-                <label for="email" class="form-label">Current Address <span class="required">*</span></label>
-                <textarea name="current_address" id="current_address" class="form-control" required></textarea>
+                <label for="email" class="form-label">Present address <span class="required">*</span></label>
+                <textarea name="current_address" id="current_address" class="form-control" required>
+                    <?php echo trim(getFilledDetails($getApplicantDetails[0], 'present_address'));?>
+                </textarea>
             </div>
             
             <div class="mb-3 mt-3">
             <div class="mb-2 mt-3 pull-right">
-                <input type="checkbox" id="same-current-address" name="same-current-address" value="same-current-address">
-                <label for="same-current-address"> Same as Current Address?</label><br>
+                <input type="checkbox" id="same-current-address" name="same-current-address" <?php echo getFilledDetails($getApplicantDetails[0], 'is_same_address') == 1 ? 'checked' : ''; ?>  value="1">
+                <label for="same-current-address"> Same as Present Address?</label><br>
             </div>
                 <label for="email" class="form-label">Permanent Address</label>
-                <textarea name="permanent_address" id="permanent_address" class="form-control" required></textarea>
+                <textarea name="permanent_address" id="permanent_address" class="form-control" required>
+                <?php echo getFilledDetails($getApplicantDetails[0], 'permanent_address');?>
+                </textarea>
             </div>
+            <div class="mb-2 mt-5">
+                <input type="checkbox" id="staying_in_hostel" <?php echo getFilledDetails($getApplicantDetails[0], 'is_staying_hostel_pg') == 1 ? 'checked' : ''; ?> name="staying_in_hostel" value="1" >
+                <label for="same-current-address"> are you staying Hostel/PG?</label><br>
+            </div>
+            <div class="mb-3 mt-3" style="display: none;" id="hostel_pg_address_div">
+                <label for="email" class="form-label">Hostel/PG Address <span class="required">*</span></label>
+                <textarea name="hostel_pg_address" id="hostel_pg_address" class="form-control" required>
+                <?php echo getFilledDetails($getApplicantDetails[0], 'hostel_pg_address');?> 
+                </textarea>
+            </div>
+
             <div class="mb-2 mt-5">
                <div class="card-header">Pancard Details </div>
                 <div class="row">
                     <div class="col-md-6">
-                    <label for="email" class="form-label">Pancard Number</label>
-                    <input type="text" class="form-control" name="pancard_no" value=""  required>
+                    <label for="email" class="form-label">PAN No.</label>
+                    <input type="text" class="form-control pancard_text" name="pancard_no" value="<?php echo strtoupper(getFilledDetails($getApplicantDetails[0], 'pancard_no'));?> " >
                     </div>
                     <div class="col-md-6">
-                    <label for="email" class="form-label">Upload Pancard</label>
-                     <input type="file" class="form-control" name="pancard_image" value=""  required>
+                    <label for="email" class="form-label">Upload Pancard </label>
+                     <input type="file" class="form-control uplooad-file" name="pancard_image" value="" >
+                     <?php echo upload_validation_msg();?><br>
+                     <?php 
+                      if(isset($getApplicantDetails[0]['pancard_image']) && $getApplicantDetails[0]['pancard_image']!=""){?>
+                    <a  href="<?php echo BASE_URL .'/documents/'.$getApplicantDetails[0]['pancard_image'];?>" target="_blank">Click to View Pancard</a>
+                      <?php } ?>
+                     
                     </div>
                 </div>
             </div>
+            
             <div class="mb-2 mt-5">
                <div class="card-header">Aadhaar Card Details <span class="required">*</span></div>
                 <div class="row">
@@ -174,12 +146,33 @@
                     </div>
                     <div class="col-md-6">
                     <label for="email" class="form-label">Upload Aadhaar Card<span class="required">*</span></label>
-                     <input type="file" class="form-control" name="pancard_image" value=""  required>
+                     
+                     <?php 
+                      if(isset($getApplicantDetails[0]['aadhaar_image']) && $getApplicantDetails[0]['aadhaar_image']!=""){?>
+                         <input type="file" class="form-control uplooad-file" name="aadhaar_image" value="" >
+                         <?php echo upload_validation_msg();?><br>
+                        <a  href="<?php echo BASE_URL .'/documents/'.$getApplicantDetails[0]['aadhaar_image'];?>" target="_blank">Click to View Aadhaar</a>
+                      <?php }else{ ?>
+                        <input type="file" class="form-control uplooad-file" name="aadhaar_image" value=""  required>
+                      <?php } ?>
                     </div>
                 </div>
             </div>
             <div class="mb-2 mt-5">
-            <div class="card-header">Family Details </div>
+                <div class="card-header">APAAR Details </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="full_name" class="form-label">APAAR NO.</label>
+                        <input type="text"  min="0" class="form-control" id="no_of_brother" name="apaar_no" value="<?php echo getDetail($getApplicantDetails[0], 'apaar_no'); ?>" required>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="mb-2 mt-5">
+            <div class="card-header">Family Details <span class="required">*</span></div>
+                
+            </div>
+            <div class="mb-2 mt-3 pull-right" >
                 <input type="checkbox" id="single-parent" name="parent_type" value="single_parent" <?php echo getFilledDetails($getApplicantDetails[0], 'single_parent') == 1 ? 'checked' : ''; ?>>
                 <label for="single-parent"> Single Parent</label><br>
             </div>
@@ -214,14 +207,16 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="full_name" class="form-label">No. of Brothers</label>
-                        <input type="text" class="form-control" id="no_of_brother" name="no_of_brother" value="<?php echo getDetail($getApplicantDetails[0], 'no_of_brother'); ?>" required>
+                        <input type="number"  min="0" class="form-control" id="no_of_brother" name="no_of_brother" value="<?php echo getDetail($getApplicantDetails[0], 'no_of_brother'); ?>" required>
                     </div>
                     <div class="col-md-6">
                         <label for="full_name" class="form-label">No. of Sisters</label>
-                        <input type="text" class="form-control" id="no_of_sister" name="no_of_sister" value="<?php echo getDetail($getApplicantDetails[0], 'no_of_sister'); ?>" required>
+                        <input type="number"  min="0" class="form-control" id="no_of_sister" name="no_of_sister" value="<?php echo getDetail($getApplicantDetails[0], 'no_of_sister'); ?>" required>
                     </div>
                 </div>
             </div>
+
+            
    
             <button type="submit" class="btn btn-primary first-form" style="width:10%">Next</button>
 </form>

@@ -1,5 +1,16 @@
 <?php
 include_once 'includes/header.php';
+require_once 'includes/Instances.php';
+require_once 'includes/dbconfig.php';
+$db = Instances::get('DB');
+$table = 'tbl_schollarship_part_1';
+if(isset($_SESSION['svtc_user_detais']['id'])){
+  $applicationId = $_SESSION['svtc_user_detais']['id'];
+  $getApplicantDetails = $db->query("SELECT * FROM $table where user_id=$applicationId");
+  if(empty($getApplicantDetails)){
+    $getApplicantDetails[0]=[];
+  }
+}
 ?>
 
 <body class="about-page">
@@ -74,8 +85,12 @@ include_once 'includes/header.php';
         <div class="col-lg-6 order-lg-1">
         <h2 class="content-title text-center">
         Check Application Status
+        
             </h2>
-            <?php include_once 'includes/application_status.php';?>
+            <?php if(!empty($getApplicantDetails[0])){?>
+             <h6 class="text-center">(Your current Status id is : <?php echo "In-review"?>)</h6>
+            <?php } ?>
+            <?php //include_once 'includes/application_status.php';?>
         </div>
     </div>
 </div>

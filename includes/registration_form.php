@@ -12,6 +12,7 @@
                 <button type="submit" class="btn btn-primary w-100 login-button" id="login-form">Login</button>
                 <div class="mt-3 text-center">
                     <p>Don't have an account? <a href="#" class="text-decoration-none loginBtn ">Sign up</a></p>
+                    <p><a href="#" class="text-decoration-none forgotBtn ">Forgot Password</a></p>
                 </div>
             </form>
         </div>

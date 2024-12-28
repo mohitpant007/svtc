@@ -12,9 +12,9 @@ include_once 'includes/header.php';
             <div class="container">
                 <div class="row align-items-center justify-content-between">
                     <div class="col-lg-7 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="400">
-                    <span class="section-subtitle" data-aos="fade-up">Welcome to</span>
+                        <span class="section-subtitle" data-aos="fade-up">Welcome to</span>
                         <h1 class="mb-4" data-aos="fade-up">
-                        Sri Vasudevamurthy Tulasi Charitable Trust (R)
+                            Sri Vasudevamurthy Tulasi Charitable Trust (R)
                         </h1>
                         <div class="swiper init-swiper">
                             <script type="application/json" class="swiper-config">
@@ -56,16 +56,15 @@ include_once 'includes/header.php';
                             <div class="swiper-pagination"></div>
                         </div>
                     </div>
-                    <div class="col-lg-5 order-lg-1">
+                    <div class="col-lg-5 order-lg-1 mt-5">
 
-                        <?php 
-                        if(isset($_SESSION['svtc_user_login']) && $_SESSION['svtc_user_login'] == 1){
+                        <?php
+                        if (isset($_SESSION['svtc_user_login']) && $_SESSION['svtc_user_login'] == 1) {
                             include_once 'includes/schollership_form.php';
-                          
-                        }else{
+                        } else {
                             include_once 'includes/registration_form.php';
                         }
-                        
+
                         ?>
                     </div>
                 </div>
@@ -88,35 +87,35 @@ include_once 'includes/header.php';
 
                         <div class="offset-md-0 offset-lg-1 col-sm-12 col-md-5 col-lg-5 col-xl-6" data-aos="fade-up">
                             <div class="px-1">
-                               
+
                                 <h2 class="content-title text-start">
-                                Welcome to Sri Vasudevamurthy Tulasi Charitable Trust (R)
+                                    Welcome to Sri Vasudevamurthy Tulasi Charitable Trust (R)
                                 </h2>
                                 <span class="content-subtitle">About SVTC</span>
                                 <p class="lead">
-                                We support economically poor students ,but not students who are academically POOR. Educational scholarship is only given to students who are hardworking, diligent, meticulous, consistent and have a purpose of performance in life. Preference for this offer is for BRAHMINS – Madhwa’s / Smartha’s / Vyshnav’s. We also honour poor students who have secured 90% & above in any Board Exam,with a PRATHIBA PURASKARA AWARD
+                                    We support economically poor students ,but not students who are academically POOR. Educational scholarship is only given to students who are hardworking, diligent, meticulous, consistent and have a purpose of performance in life. Preference for this offer is for BRAHMINS – Madhwa’s / Smartha’s / Vyshnav’s. We also honour poor students who have secured 90% & above in any Board Exam,with a PRATHIBA PURASKARA AWARD
                                 </p>
-                               
-                                
+
+
                             </div>
                         </div>
                         <div class="offset-md-0 offset-lg-1 col-sm-12 col-md-12 col-lg-12 col-xl-10" data-aos="fade-up">
                             <div class="px-1">
-                               
+
                                 <span class="content-subtitle">Objectives of the Trust</span>
-                                <p >
-                                <i class="fa fa-dot-circle-o" aria-hidden="true"></i> To establish, maintain, run, develop, improve, extend, grant, donate for and to aid in the establishment, maintenance, improvement and extension of schools, colleges, polytechnics and other educational institutions including vocational training centre’s, research centres and audio-visual educational centre’s and hostels for students pursuing their studies.
+                                <p>
+                                    <i class="fa fa-dot-circle-o" aria-hidden="true"></i> To establish, maintain, run, develop, improve, extend, grant, donate for and to aid in the establishment, maintenance, improvement and extension of schools, colleges, polytechnics and other educational institutions including vocational training centre’s, research centres and audio-visual educational centre’s and hostels for students pursuing their studies.
                                 </p>
                                 <p>
-                                <i class="fa fa-dot-circle-o" aria-hidden="true"></i> To give donations to educational institutions.
+                                    <i class="fa fa-dot-circle-o" aria-hidden="true"></i> To give donations to educational institutions.
                                 </p>
-                                <p >
-                                <i class="fa fa-dot-circle-o" aria-hidden="true"></i>  To constitute scholarships to poor and deserving students to enable them to continue their studies and to give grants for fees and other charges or re-imbursement for costs of books, instruments and other educational aids for educational purpose.
+                                <p>
+                                    <i class="fa fa-dot-circle-o" aria-hidden="true"></i> To constitute scholarships to poor and deserving students to enable them to continue their studies and to give grants for fees and other charges or re-imbursement for costs of books, instruments and other educational aids for educational purpose.
                                 </p>
-                                <p >
-                                <i class="fa fa-dot-circle-o" aria-hidden="true"></i>  To help establishments of student’s hostel and to give other assistances for poor and deserving students to find in-expensive living accommodation to enable them to prosecute higher studies.
+                                <p>
+                                    <i class="fa fa-dot-circle-o" aria-hidden="true"></i> To help establishments of student’s hostel and to give other assistances for poor and deserving students to find in-expensive living accommodation to enable them to prosecute higher studies.
                                 </p>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -125,10 +124,10 @@ include_once 'includes/header.php';
         </section><!-- /About 2 Section -->
 
         <!-- Services Section -->
-        
+
 
         <!-- Stats Section -->
-       
+
 
         <!-- Blog Posts Section -->
         <section id="blog-posts" class="blog-posts section">
@@ -145,13 +144,13 @@ include_once 'includes/header.php';
                             <a href="#" class="thumb d-block"><img src="assets/img/trustee_1.jpg" alt="Image" class="img-fluid rounded trustee-img trustee-img-size"></a>
 
                             <div class="post-content text-center">
-                                
+
                                 <h3>Late L V. Tulasi & Late L S Vasudeva Murthy</h3>
                                 <p>
-                                Founder Trustee
+                                    Founder Trustee
                                 </p>
 
-                                
+
                             </div>
                         </div>
                     </div>
@@ -161,10 +160,10 @@ include_once 'includes/header.php';
                             <a href="#" class="thumb d-block"><img src="assets/img/trustee_2.jpg" alt="Image" class="img-fluid rounded trustee-img"></a>
 
                             <div class="post-content text-center">
-                                
+
                                 <h3>L V Ravi</h3>
                                 <p>
-                                Managing Trustee
+                                    Managing Trustee
                                 </p>
                             </div>
                         </div>
@@ -175,13 +174,13 @@ include_once 'includes/header.php';
                             <a href="#" class="thumb d-block"><img src="assets/img/trustee_3.jpg" alt="Image" class="img-fluid rounded trustee-img"></a>
 
                             <div class="post-content text-center">
-                               
+
                                 <h3>Mamatha Ravi</h3>
                                 <p>
-                                Trustee
+                                    Trustee
                                 </p>
 
-                                
+
                             </div>
                         </div>
                     </div>
@@ -190,13 +189,13 @@ include_once 'includes/header.php';
                             <a href="#" class="thumb d-block"><img src="assets/img/trustee_4.jpg" alt="Image" class="img-fluid rounded trustee-img"></a>
 
                             <div class="post-content text-center">
-                               
+
                                 <h3>Monisha Ravi</h3>
                                 <p>
-                                Trustee
+                                    Trustee
                                 </p>
 
-                                
+
                             </div>
                         </div>
                     </div>
@@ -205,13 +204,13 @@ include_once 'includes/header.php';
                             <a href="#" class="thumb d-block"><img src="assets/img/trustee_5.jpg" alt="Image" class="img-fluid rounded trustee-img"></a>
 
                             <div class="post-content text-center">
-                               
+
                                 <h3>Nalini Ramdas</h3>
                                 <p>
-                                Trustee
+                                    Trustee
                                 </p>
 
-                                
+
                             </div>
                         </div>
                     </div>
@@ -220,13 +219,13 @@ include_once 'includes/header.php';
                             <a href="#" class="thumb d-block"><img src="assets/img/trustee_6.jpg" alt="Image" class="img-fluid rounded trustee-img"></a>
 
                             <div class="post-content text-center">
-                               
+
                                 <h3>Nandini Jai</h3>
                                 <p>
-                                Trustee
+                                    Trustee
                                 </p>
 
-                                
+
                             </div>
                         </div>
                     </div>
@@ -235,16 +234,16 @@ include_once 'includes/header.php';
         </section><!-- /Blog Posts Section -->
 
         <!-- Tabs Section -->
-        
+
 
         <!-- Services 2 Section -->
-       
+
 
         <!-- Pricing Section -->
-       
+
 
         <!-- Faq Section -->
-        <section id="faq" class="faq section">
+        <section id="faq" class="faq about-2 section light-background">
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <p>Plans</p>
@@ -252,6 +251,7 @@ include_once 'includes/header.php';
             </div><!-- End Section Title -->
 
             <div class="container" data-aos="fade-up">
+            <div class="content_1">
                 <div class="row">
                     <div class="col-12">
                         <div class="custom-accordion" id="accordion-faq">
@@ -309,6 +309,7 @@ include_once 'includes/header.php';
                         <!-- .accordion-item -->
 
                     </div>
+                </div>
                 </div>
             </div>
             </div>

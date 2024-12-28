@@ -246,3 +246,17 @@ input:read-only {
 .calender-width{
   width:50% !important;
 }
+
+.pancard_text{
+  text-transform: capitalize;
+}
+.label-bold{
+  font-weight: bold;
+}
+.internal-form{
+  margin-top: 2.5rem !important;;
+}
+
+.display-none{
+  display: none;
+}

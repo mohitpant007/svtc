@@ -4,9 +4,26 @@ require_once 'includes/Instances.php';
 require_once 'includes/dbconfig.php';
 $db = Instances::get('DB');
 $table = 'tbl_schollarship_part_1';
+$table_family = 'tbl_schollarship_part_2';
 if(isset($_SESSION['svtc_user_detais']['id'])){
   $applicationId = $_SESSION['svtc_user_detais']['id'];
-  $getApplicantDetails = $db->query("SELECT * FROM $table where application_id='{$applicationId}'");
+  $getApplicantDetails = $db->query("SELECT * FROM $table where user_id=$applicationId");
+  $fetchSingleParentDetails = $db->query("SELECT * FROM $table_family where user_id=$applicationId and relationship_type ='single_parent'");
+  if(empty($fetchSingleParentDetails)){
+    $fetchSingleParentDetails[0]=[];
+  }
+  $fetchPartnerDetails = $db->query("SELECT * FROM $table_family where user_id=$applicationId and relationship_type ='partner'");
+  if(empty($fetchPartnerDetails)){
+    $fetchPartnerDetails[0]=[];
+  }
+  $fetchFatherDetails = $db->query("SELECT * FROM $table_family where user_id=$applicationId and relationship_type ='father'");
+  if(empty($fetchFatherDetails)){
+    $fetchFatherDetails[0]=[];
+  }
+  $fetchMotherDetails = $db->query("SELECT * FROM $table_family where user_id=$applicationId and relationship_type ='mother'");
+  if(empty($fetchMotherDetails)){
+    $fetchMotherDetails[0]=[];
+  }
 }
 
 ?>

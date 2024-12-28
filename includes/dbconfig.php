@@ -12,7 +12,9 @@ else
 }
 
 define('DB_DATABASE', 'svtc_db');
-
+define('UPLOAD_DIR','../documents/');
+define('BASE_URL','http://localhost/svtc');
+define('UPLOAD_BASE_URL','http://localhost/svtc/documents/');
 class DB {
 	// public $connection;
 	protected $db;

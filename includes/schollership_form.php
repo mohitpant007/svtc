@@ -11,7 +11,7 @@
         
          <!-- form-group// -->                                      
          <div class="form-group mt-2 text-center">
-         <a href="scholarship-apply"><button type="button" class="btn btn-primary btn-block login-button"> Resume Application! </button></a>
+         <a href="application-status"><button type="button" class="btn btn-primary btn-block login-button"> Check Application Status! </button></a>
          </div>
          <!-- form-group// -->      
          <!-- <p class="text-center">Have an account? <a href="">Log In</a> </p> -->

@@ -9,317 +9,309 @@
         <div id="familyContainer">
             <?php if(isset($getApplicantDetails[0]['single_parent']) && $getApplicantDetails[0]['single_parent'] == 1){$j=1;?>
             <div class="family-item mb-3 family-member">
-                <h5>Family Member #1</h5>
+                <h5><?php echo ucwords(getFilledDetails($getApplicantDetails[0], 'parent_relation'));?> Details:</h5>
                 <div class="row">
-                    <div class="col-md-3">
-                        <?php
-                        $single_pareent_relation = getFilledDetails($getApplicantDetails[0], 'parent_relation');
+                <div class="col-md-3">
+                       <?php
+                          $single_pareent_relation = getFilledDetails($getApplicantDetails[0], 'parent_relation');
                         ?>
-                        <input type="text" class="form-control" name="family_name" placeholder="Name" value="<?php echo getDetail($getApplicantDetails[0], $single_pareent_relation.'_name'); ?>"  disabled="disabled">
+                        <label for="email" class="form-label">Name: <?php echo getDetail($getApplicantDetails[0], $single_pareent_relation.'_name'); ?></label>
+                        
+                    </div>
+
+                    <div class="col-md-3">
+                      <label for="email" class="form-label">Occupation</label>
+                      <input type="hidden" name="single_parent_name" value="<?php echo getDetail($getApplicantDetails[0], $single_pareent_relation.'_name'); ?>">
+                        <input type="hidden" value="1" name="relationship_single_parent_type">
+                        <select name="sigle_parent_occupation" class="form-control form-select occupation-select"  id="sigle_parent_occupation">
+                            <option value="">Select Occupation</option>
+                            <?php foreach(ALL_OCCUPATION as $occupation):?>
+                                <option value="<?php echo $occupation;?>" <?php echo getFilledDetails($fetchSingleParentDetails[0], 'occupation') == $occupation ? 'selected' : ''; ?>><?php echo $occupation;?></option>
+                            <?php endforeach;?>  
+                        </select>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-select" id="dob-month" name="relation"  disabled>
-                            <option value="" selected >Select Relationship</option>
-                            <option value="father" <?php echo getFilledDetails($getApplicantDetails[0], 'parent_relation') == 'father' ? 'selected' : ''; ?>>Father</option>
-                            <option value="mother" <?php echo getFilledDetails($getApplicantDetails[0], 'parent_relation') == 'mother' ? 'selected' : ''; ?>>Mother</option>
-                           
+                       <label for="email" class="form-label">Qualification</label>
+                        <select class="form-select education-level-family" id="single_parent_qualification" name="single_parent_qualification" >
+                            <option value="">Select Qualification</option>
+                            <?php foreach(ALL_QUALIFICATION as $qualification):?>
+                                <option value="<?php echo $qualification;?>"  <?php echo getFilledDetails($fetchSingleParentDetails[0], 'qualification') == $qualification ? 'selected' : ''; ?>><?php echo $qualification;?></option>
+                            <?php endforeach;?>
                         </select>
-                        <!-- <input type="text" class="form-control" name="family[0][relationship]" placeholder="Relationship" > -->
+                    </div>
+                    <div class="col-md-3">
+                       
+                       <label for="email" class="form-label">Pancard No.</label>
+                        <input type="text" class="form-control" name="single_parent_pancard_no" placeholder="Pancard Number" value="<?php echo getFilledDetails($fetchSingleParentDetails[0], 'pancard_no');?>" >
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label for="email" class="form-label">Aadhaar Card No.</label>
+                        <input type="text" class="form-control" name="single_parent_aadhar_no" placeholder="Aadhar Card Number" value="<?php echo getFilledDetails($fetchSingleParentDetails[0], 'aadhaar_card_no');?>">
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label for="email" class="form-label">Mobile No.</label>
+                        <input type="text" class="form-control" name="single_parent_contact_no" placeholder="Mobile No." pattern="[0-9]{10}" title="Enter a valid 10-digit mobile number" value="<?php echo getFilledDetails($fetchSingleParentDetails[0], 'mobile_no');?>">
+                    </div>
+                    <div class="col-md-4 mt-2">
+                    <label for="email" class="form-label">Total Annual Income</label>
+                        <input type="text" class="form-control" name="single_parent_income" placeholder="Total Annual Income" value="<?php echo getFilledDetails($fetchSingleParentDetails[0], 'total_annual_income');?>">
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="full_name" class="form-label important-upload ">* Upload salary slip / Bank statement - last 6 Month bank statement</label>
+                        <input type="file" name="single_parent_doc" class="form-control income-proof salary-upload" accept=".pdf,.jpg,.png" >
+                        <?php echo upload_validation_msg();?><br>
+                        <?php echo open_uploaded_file($fetchSingleParentDetails[0],'income_doc','family-details');?>
+                    </div>
+                    <!-- <div class="col-md-6 mt-2.5">
+                    <button type="submit" class="btn btn-primary internal-form">Save</button>
+                    </div> -->
+                    
+                </div>
+                <hr>
+            </div>
+            <?php }else{ $j=2;?>
+                <div class="family-item mb-3 family-member">
+                <h5>Father Details:</h5>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="email" class="form-label">Name: <?php echo ucwords(getDetail($getApplicantDetails[0], 'father_name')); ?></label>
+                        
                     </div>
 
                     <div class="col-md-3">
                         <!-- <input type="text" class="form-control" name="family[0][occupation]" placeholder="Occupation" > -->
-                        <select name="sigle_parent_occupation" class="form-control form-select occupation-select" required id="sigle_parent_occupation">
+                         
+                        <label for="email" class="form-label">Occupation</label>
+                        <input type="hidden" value="<?php echo ucwords(getDetail($getApplicantDetails[0], 'father_name')); ?>" name="father_name">
+                        <input type="hidden" value="father" name="relationship_father_type">
+                        <select name="father_occupation" class="form-control form-select occupation-select" >
                             <option value="">Select Occupation</option>
-                            <option value="Government Servant">Government Servant</option>
-                            <option value="Private Employee">Private Employee</option>
-                            <option value="Businessman/Businesswoman">Businessman/Businesswoman</option>
-                            <option value="IT Professional">IT Professional</option>
-                            <option value="Farmer/Agriculturist">Farmer/Agriculturist</option>
-                            <option value="Housewife/Homemaker">Housewife/Homemaker</option>
-                            <option value="Housewife/Homemaker">Housewife/Homemaker</option>
-                            <option value="Researcher">Researcher</option>
-                            <option value="Unemployed">Unemployed</option>
-                            <option value="Retired">Retired</option>
+                            <?php foreach(ALL_OCCUPATION as $occupation):?>
+                                <option value="<?php echo $occupation;?>" <?php echo getFilledDetails($fetchFatherDetails[0], 'occupation') == $occupation ? 'selected' : ''; ?>><?php echo $occupation;?></option>
+                            <?php endforeach;?>  
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-select education-level-family" id="qualification1" name="single_parent_qualification" required="true">
-                            <option value="">-- Select Qualification --</option>
-                            <option value="Elementary education">Elementary education</option>
-                            <option value="Secondary Education">Secondary Education</option>
-                            <option value="ITI">ITI</option>
-                            <option value="Diploma/Certificate program">Diploma/Certificate program</option>
-                            <option value="Higher Secondary Education">Higher Secondary Education</option>
-                            <option value="Graduate">Graduate</option>
-                            <option value="Post graduate">Post graduate</option>
-                            <option value="Doctorate">Doctorate</option>
+                        <label for="email" class="form-label">Qualification</label>
+                        <select class="form-select education-level-family" id="father_qualification" name="father_qualification" >
+                            <option value="">Select Qualification</option>
+                            <?php foreach(ALL_QUALIFICATION as $qualification):?>
+                                <option value="<?php echo $qualification;?>"  <?php echo getFilledDetails($fetchFatherDetails[0], 'qualification') == $qualification ? 'selected' : ''; ?>><?php echo $qualification;?></option>
+                            <?php endforeach;?>
                         </select>
                     </div>
-                    <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="single_parent_pancard_no" placeholder="Pancard Number" required="true">
+                    <div class="col-md-3">
+                        <label for="email" class="form-label">Pancard No.</label>
+                        <input type="text" class="form-control" name="father_pancard_no" placeholder="Pancard Number"  value="<?php echo getFilledDetails($fetchFatherDetails[0], 'pancard_no');?>">
                     </div>
                     <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="single_parent_aadhar_no" placeholder="Aadhar Card Number" >
+                       <label for="email" class="form-label">Aadhaar Card Number</label>
+                        <input type="text" class="form-control" name="father_aadhar_no" placeholder="Aadhaar Card Number" pattern="\d{12}" maxlength="12" value="<?php echo getFilledDetails($fetchFatherDetails[0], 'aadhaar_card_no');?>">
                     </div>
                     <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="single_parent_contact_no" placeholder="Mobile No." pattern="[0-9]{10}" title="Enter a valid 10-digit mobile number" >
+                    <label for="email" class="form-label">Mobile No.</label>
+                        <input type="text" class="form-control" name="father_contact_no" placeholder="Mobile No."  pattern="^[6-9]\d{9}$" 
+                        title="Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9." value="<?php echo getFilledDetails($fetchFatherDetails[0], 'mobile_no');?>">
                     </div>
                     <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="single_parent_income[]" placeholder="Total income" >
+                        <label for="email" class="form-label">Annual Income</label>
+                        <input type="text" class="form-control" name="father_income" placeholder="Annual income" value="<?php echo getFilledDetails($fetchFatherDetails[0], 'total_annual_income');?>">
                     </div>
                     <div class="col-md-6 mt-2">
-                        <label for="full_name" class="form-label important-upload">* Upload salary slip / Bank statement - last 1 year bank statement</label>
-                        <input type="file" name="single_parent_doc[]" class="form-control income-proof" accept=".pdf,.jpg,.png" >
+                        <label for="full_name" class="form-label important-upload">* Upload salary slip / Bank statement - last 6 Month bank statement</label>
+                        <input type="file" name="father_doc" class="form-control income-proof" accept=".pdf," >
+                        <?php echo upload_validation_msg();?><br>
+                        <?php echo open_uploaded_file($fetchFatherDetails[0],'income_doc','family-details');?>
                         <div class="error"></div>
-                    </div>
-                    <div class="col-md-6 mt-2">
-                    <label for="full_name" class="form-label important-upload">* Upload Aadhar Card</label>
-                        <input type="file" name="single_parent_aadhar[]" class="form-control income-proof" accept=".pdf,.jpg,.png" >
-                        
-                    </div>
-                    <div class="col-md-6 mt-2">
-                    <label for="full_name" class="form-label important-upload">* Upload Pancard Card</label>
-                        <input type="file" name="single_parent_pacard" class="form-control income-proof" accept=".pdf,.jpg,.png" >
-                        
                     </div>
                     
 
                 </div>
                 <hr>
             </div>
-            <?php }else{ $j=2;?>
-                <div class="family-item mb-3 family-member">
-                <h5>Family Member #1</h5>
-                <div class="row">
-                    <div class="col-md-3">
-                        <input type="text" class="form-control" name="father_name" placeholder="Name" value="<?php echo getDetail($getApplicantDetails[0], 'father_name'); ?>"  disabled="disabled">
-                    </div>
-                    <div class="col-md-3">
-                        <select class="form-select" id="dob-month" name="dob-month"  disabled>
-                            <option value="father" >Father</option>
-                        </select>
-                        <!-- <input type="text" class="form-control" name="family[0][relationship]" placeholder="Relationship" > -->
-                    </div>
-
-                    <div class="col-md-3">
-                        <!-- <input type="text" class="form-control" name="family[0][occupation]" placeholder="Occupation" > -->
-                        <select name="father_occupation" class="form-control form-select occupation-select" >
-                            <option value="">Select Occupation</option>
-                            <option value="Government Servant">Government Servant</option>
-                            <option value="Private Employee">Private Employee</option>
-                            <option value="Businessman/Businesswoman">Businessman/Businesswoman</option>
-                            <option value="IT Professional">IT Professional</option>
-                            <option value="Farmer/Agriculturist">Farmer/Agriculturist</option>
-                            <option value="Housewife/Homemaker">Housewife/Homemaker</option>
-                            <option value="Housewife/Homemaker">Housewife/Homemaker</option>
-                            <option value="Researcher">Researcher</option>
-                            <option value="Unemployed">Unemployed</option>
-                            <option value="Retired">Retired</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <select class="form-select education-level-family" id="qualification1" name="father_qualification" required>
-                            <option value="">-- Select Qualification --</option>
-                            <option value="Elementary education">Elementary education</option>
-                            <option value="Secondary Education">Secondary Education</option>
-                            <option value="ITI">ITI</option>
-                            <option value="Diploma/Certificate program">Diploma/Certificate program</option>
-                            <option value="Higher Secondary Education">Higher Secondary Education</option>
-                            <option value="Graduate">Graduate</option>
-                            <option value="Post graduate">Post graduate</option>
-                            <option value="Doctorate">Doctorate</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="father_pancard_no" placeholder="Pancard Number" >
-                    </div>
-                    <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="father_aadhar_no" placeholder="Aadhar Card Number" >
-                    </div>
-                    <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="father_contact_no" placeholder="Mobile No." >
-                    </div>
-                    <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="father_income" placeholder="Annual income" >
-                    </div>
-                    <div class="col-md-6 mt-2">
-                        <label for="full_name" class="form-label important-upload">* Upload salary slip / Bank statement - last 1 year bank statement</label>
-                        <input type="file" name="father_doc" class="form-control income-proof" accept=".pdf,.jpg,.png" >
-                        <div class="error"></div>
-                    </div>
-                    <div class="col-md-6 mt-2">
-                    <label for="full_name" class="form-label important-upload">* Upload Aadhar Card</label>
-                        <input type="file" name="father_aadhar" class="form-control" accept=".pdf,.jpg,.png" >
-                       
-                    </div>
-                    <div class="col-md-6 mt-2">
-                    <label for="full_name" class="form-label important-upload">* Upload Pancard Card</label>
-                        <input type="file" name="father_panacard" class="form-control" accept=".pdf,.jpg,.png" >
-                       
-                    </div>
-
-                </div>
-                <hr>
-            </div>
             <div class="family-item mb-3 family-member">
-                <h5>Family Member #2</h5>
+                <h5>Mother Details:</h5>
                 <div class="row">
                     <div class="col-md-3">
-                        <input type="text" class="form-control" name="mother_name" placeholder="Name" value="<?php echo getDetail($getApplicantDetails[0], 'mother_name'); ?>"  disabled="disabled">
+                       <label for="email" class="form-label">Name: <?php echo ucwords(getDetail($getApplicantDetails[0], 'mother_name')); ?></label>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-select" id="dob-month" name="dob-month"  disabled>
-                            <option value="mother" >Mother</option>
-                        </select>
-                        <!-- <input type="text" class="form-control" name="family[0][relationship]" placeholder="Relationship" > -->
-                    </div>
-
-                    <div class="col-md-3">
-                        <!-- <input type="text" class="form-control" name="family[0][occupation]" placeholder="Occupation" > -->
+                        <label for="email" class="form-label">Occupation</label>
+                        <input type="hidden" value="<?php echo ucwords(getDetail($getApplicantDetails[0], 'mother_name')); ?>" name="mother_name">
+                        <input type="hidden" value="mother" name="relationship_mother_type">
                         <select name="mother_occupation" class="form-control form-select occupation-select" >
                             <option value="">Select Occupation</option>
-                            <option value="Government Servant">Government Servant</option>
-                            <option value="Private Employee">Private Employee</option>
-                            <option value="Businessman/Businesswoman">Businessman/Businesswoman</option>
-                            <option value="IT Professional">IT Professional</option>
-                            <option value="Farmer/Agriculturist">Farmer/Agriculturist</option>
-                            <option value="Housewife/Homemaker">Housewife/Homemaker</option>
-                            <option value="Housewife/Homemaker">Housewife/Homemaker</option>
-                            <option value="Researcher">Researcher</option>
-                            <option value="Unemployed">Unemployed</option>
-                            <option value="Retired">Retired</option>
+                            <?php foreach(ALL_OCCUPATION as $occupation):?>
+                                <option value="<?php echo $occupation;?>" <?php echo getFilledDetails($fetchMotherDetails[0], 'occupation') == $occupation ? 'selected' : ''; ?>><?php echo $occupation;?></option>
+                            <?php endforeach;?>  
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-select education-level-family" id="qualification1" name="mother_qualification" required>
-                            <option value="">-- Select Qualification --</option>
-                            <option value="Elementary education">Elementary education</option>
-                            <option value="Secondary Education">Secondary Education</option>
-                            <option value="ITI">ITI</option>
-                            <option value="Diploma/Certificate program">Diploma/Certificate program</option>
-                            <option value="Higher Secondary Education">Higher Secondary Education</option>
-                            <option value="Graduate">Graduate</option>
-                            <option value="Post graduate">Post graduate</option>
-                            <option value="Doctorate">Doctorate</option>
+                       <label for="email" class="form-label">Qualification</label>
+                        <select class="form-select education-level-family" id="mother_qualification" name="mother_qualification" >
+                            <option value="">Select Qualification</option>
+                            <?php foreach(ALL_QUALIFICATION as $qualification):?>
+                                <option value="<?php echo $qualification;?>"  <?php echo getFilledDetails($fetchMotherDetails[0], 'qualification') == $qualification ? 'selected' : ''; ?>><?php echo $qualification;?></option>
+                            <?php endforeach;?>
                         </select>
                     </div>
-                    <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="mother_pancard_no" placeholder="Pancard Number" >
+                    <div class="col-md-3">
+                        <label for="email" class="form-label">Pancard No.</label>
+                        <input type="text" class="form-control" name="mother_pancard_no" placeholder="Pancard Number" value="<?php echo getFilledDetails($fetchMotherDetails[0], 'pancard_no');?>">
                     </div>
                     <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="mother_aadhar_no" placeholder="Aadhar Card Number" >
+                        <label for="email" class="form-label">Aadhar Card No.</label>
+                        <input type="text" class="form-control" name="mother_aadhar_no" placeholder="Aadhar Card Number" pattern="\d{12}" maxlength="12" value="<?php echo getFilledDetails($fetchMotherDetails[0], 'aadhaar_card_no');?>">
                     </div>
                     <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="mother_contact_no" placeholder="Mobile No." >
+                        <label for="email" class="form-label">Mobile No.</label>
+                        <input type="text" class="form-control" name="mother_contact_no" placeholder="Mobile No." value="<?php echo getFilledDetails($fetchMotherDetails[0], 'mobile_no');?>">
                     </div>
                     <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="mother_income" placeholder="Annal income" >
+                    <label for="email" class="form-label">Annual Income</label>
+                        <input type="text" class="form-control" name="mother_income" placeholder="Annual Income" value="<?php echo getFilledDetails($fetchMotherDetails[0], 'total_annual_income');?>">
                     </div>
                     <div class="col-md-6 mt-2">
-                        <label for="full_name" class="form-label important-upload">* Upload salary slip / Bank statement - last 1 year bank statement</label>
+                        <label for="full_name" class="form-label important-upload">* Upload salary slip / Bank statement - last 6 Month bank statement</label>
                         <input type="file" name="mother_doc" class="form-control income-proof" accept=".pdf,.jpg,.png" >
+                        <?php echo upload_validation_msg();?><br>
+                        <?php echo open_uploaded_file($fetchMotherDetails[0],'income_doc','family-details');?>
                         <div class="error"></div>
                     </div>
-                    <div class="col-md-6 mt-2">
-                    <label for="full_name" class="form-label important-upload">* Upload Aadhar Card</label>
-                        <input type="file" name="mother_aadhar" class="form-control" accept=".pdf,.jpg,.png" >
-                        
-                    </div>
-                    <div class="col-md-6 mt-2">
-                    <label for="full_name" class="form-label important-upload">* Upload Pancard Card</label>
-                        <input type="file" name="mother_aadhar" class="form-control" accept=".pdf,.jpg,.png" >
-                        
-                    </div>
+                    
 
                 </div>
                 <hr>
             </div>
             <?php } ?>  
+            <div class="family-item mb-3 family-member">
+                <h5><?php 
+                if(getDetail($getApplicantDetails[0], 'gender') != 'Other'){
+                  echo getDetail($getApplicantDetails[0], 'gender') == 'Male'?'Spouse Details :':'Spouse Details :';
+                }else{
+                  echo 'Spouse Details :';
+                }
+                
+                ?></h5>
+                <div class="row">
+                    <div class="col-md-3">
+                       <label for="email" class="form-label">Name </label>
+                       <input type="text" class="form-control" name="partner_name" placeholder="Name" value="<?php echo getFilledDetails($fetchPartnerDetails[0], 'name');?>">
+                    </div>
+                    <div class="col-md-3">
+                    <input type="hidden" value="partner" name="relationship_partner_type">
+                        <label for="email" class="form-label">Occupation</label>
+                        <select name="partner_occupation" class="form-control form-select occupation-select" >
+                            <option value="">Select Occupation</option>
+                            <?php foreach(ALL_OCCUPATION as $occupation):?>
+                                <option value="<?php echo $occupation;?>" <?php echo getFilledDetails($fetchPartnerDetails[0], 'occupation') == $occupation ? 'selected' : ''; ?>><?php echo $occupation;?></option>
+                            <?php endforeach;?> 
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                       <label for="email" class="form-label">Qualification</label>
+                        <select class="form-select education-level-family" id="partner_qualification" name="partner_qualification" >
+                        <?php foreach(ALL_QUALIFICATION as $qualification):?>
+                                <option value="<?php echo $qualification;?>"  <?php echo getFilledDetails($fetchPartnerDetails[0], 'qualification') == $qualification ? 'selected' : ''; ?>><?php echo $qualification;?></option>
+                            <?php endforeach;?>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="email" class="form-label">Pancard No.</label>
+                        <input type="text" class="form-control" name="partner_pancard_no" placeholder="Pancard Number" value="<?php echo getFilledDetails($fetchPartnerDetails[0], 'pancard_no');?>">
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label for="email" class="form-label">Aadhar Card No.</label>
+                        <input type="text" class="form-control" name="partner_aadhar_no" placeholder="Aadhar Card Number" pattern="\d{12}" maxlength="12" value="<?php echo getFilledDetails($fetchPartnerDetails[0], 'aadhaar_card_no');?>">
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label for="email" class="form-label">Mobile No.</label>
+                        <input type="text" class="form-control" name="partner_contact_no" placeholder="Mobile No."  value="<?php echo getFilledDetails($fetchPartnerDetails[0], 'mobile_no');?>">
+                    </div>
+                    <div class="col-md-4 mt-2">
+                    <label for="email" class="form-label">Annual Income</label>
+                        <input type="text" class="form-control" name="partner_income" placeholder="Annual Income" value="<?php echo getFilledDetails($fetchPartnerDetails[0], 'total_annual_income');?>">
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="full_name" class="form-label important-upload">* Upload salary slip / Bank statement - last 6 Month bank statement</label>
+                        <input type="file" name="partner_doc" class="form-control income-proof" accept=".pdf" >
+                        <?php echo upload_validation_msg();?><br>
+                        <?php echo open_uploaded_file($fetchPartnerDetails[0],'income_doc','family-details');?>
+                        <div class="error"></div>
+                    </div>
+                    
+
+                </div>
+                <hr>
+            </div>
             <?php 
             if($getApplicantDetails[0]['no_of_brother'] > 0){
             for($i=0;$i<$getApplicantDetails[0]['no_of_brother'];$i++){
-                $k=$j+1+$i;
+                $k=$i+1;
+                $getBrotherDetails = $db->query("SELECT * FROM $table_family where user_id=$applicationId and relationship_type ='brother' and brother_no = $k");
+                if(empty($getBrotherDetails)){
+                    $getBrotherDetails[0]=[];
+                  }
                 ?> 
             <div class="family-item mb-3 family-member">
-                <h5>Family Member #<?php echo $j+1+$i;?></h5>
+                <h5>Brother <?php echo $i+1;?> Details:</h5>
                 <div class="row">
                     <div class="col-md-3">
-                        <input type="text" class="form-control" name="family[0][name]" placeholder="Name" >
+                        <label for="email" class="form-label">Name</label>
+                        <input type="text" class="form-control" name="brother_name_<?php echo $k;?>" placeholder="Name" value="<?php echo getFilledDetails($getBrotherDetails[0], 'name');?>">
                     </div>
                     <div class="col-md-3">
-                        <select class="form-select" id="dob-month" name="dob-month" disabled="disabled" >
-                           
-                            <option value="brother">Brother</option>
-                        </select>
-                        <!-- <input type="text" class="form-control" name="family[0][relationship]" placeholder="Relationship" > -->
-                    </div>
-
-                    <div class="col-md-3">
-                        <!-- <input type="text" class="form-control" name="family[0][occupation]" placeholder="Occupation" > -->
-                        <select name="brother_occupation[]" class="form-control form-select occupation-select" id="brother_occupation_<?php echo $k;?>" required>
+                    <input type="hidden" value="brother" name="relationship_brother_type">
+                        <label for="email" class="form-label">Occupation</label>
+                        <select name="brother_occupation_<?php echo $k;?>" class="form-control form-select occupation-select" id="brother_occupation_<?php echo $k;?>" >
                            <option value="">Select Occupation</option>
-                            <option value="Government Servant">Government Servant</option>
-                            <option value="Private Employee">Private Employee</option>
-                            <option value="Businessman/Businesswoman">Businessman/Businesswoman</option>
-                            <option value="IT Professional">IT Professional</option>
-                            <option value="Farmer/Agriculturist">Farmer/Agriculturist</option>
-                            <option value="Housewife/Homemaker">Housewife/Homemaker</option>
-                            <option value="Housewife/Homemaker">Housewife/Homemaker</option>
-                            <option value="Researcher">Researcher</option>
-                            <option value="Unemployed">Unemployed</option>
-                            <option value="Retired">Retired</option>
+                           <?php foreach(ALL_OCCUPATION as $occupation):?>
+                                <option value="<?php echo $occupation;?>" <?php echo getFilledDetails($getBrotherDetails[0], 'occupation') == $occupation ? 'selected' : ''; ?>><?php echo $occupation;?></option>
+                            <?php endforeach;?>  
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-select education-level-family" id="qualification1" name="brother_qualification[]" required>
-                            <option value="">-- Select Qualification --</option>
-                            <option value="Elementary education">Elementary education</option>
-                            <option value="Secondary Education">Secondary Education</option>
-                            <option value="ITI">ITI</option>
-                            <option value="Diploma/Certificate program">Diploma/Certificate program</option>
-                            <option value="Higher Secondary Education">Higher Secondary Education</option>
-                            <option value="Graduate">Graduate</option>
-                            <option value="Post graduate">Post graduate</option>
-                            <option value="Doctorate">Doctorate</option>
+                        <label for="email" class="form-label">Qualification</label>
+                        <select class="form-select education-level-family" id="brother_qualification_<?php echo $k;?>" name="brother_qualification_<?php echo $k;?>" >
+                            <option value="">Select Qualification</option>
+                            <?php foreach(ALL_QUALIFICATION as $qualification):?>
+                                <option value="<?php echo $qualification;?>"  <?php echo getFilledDetails($getBrotherDetails[0], 'qualification') == $qualification ? 'selected' : ''; ?>><?php echo $qualification;?></option>
+                            <?php endforeach;?>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="email" class="form-label">Marital Status</label>
+                        <select class="form-select" id="maritalStatus" name="brother_maritalStatus_<?php echo $k;?>">
+                            <option value="" selected>Select Marital Status</option>
+                            <?php foreach(ALL_MARITAL_STATUS as $marital_status):?>
+                                <option value="<?php echo $marital_status;?>"  <?php echo getFilledDetails($getBrotherDetails[0], 'marital_status') == $marital_status ? 'selected' : ''; ?>><?php echo $marital_status;?></option>
+                            <?php endforeach;?>
                         </select>
                     </div>
                     <div class="col-md-4 mt-2">
-                        <select class="form-select" id="maritalStatus" name="brother_maritalStatus[]">
-                            <option value="" selected>--Select Marital Status--</option>
-                            <option value="single">Single</option>
-                            <option value="married">Married</option>
-                            <option value="divorced">Divorced</option>
-                            <option value="separated">Separated</option>
-                        </select>
+                        <label for="email" class="form-label">Pancard No.</label>
+                        <input type="text" class="form-control" name="brother_pancard_no_<?php echo $k;?>" placeholder="Pancard Number" value="<?php echo getFilledDetails($getBrotherDetails[0], 'pancard_no');?>">
                     </div>
                     <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="brother_pancard_no[]" placeholder="Pancard Number" >
+                        <label for="email" class="form-label">Aadhaar No.</label>
+                        <input type="text" class="form-control" name="brother_aadhar_no_<?php echo $k;?>" placeholder="Aadhar Card Number" value="<?php echo getFilledDetails($getBrotherDetails[0], 'aadhaar_card_no');?>">
                     </div>
                     <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="brother_aadhar_no[]" placeholder="Aadhar Card Number" >
+                       <label for="email" class="form-label">Mobile No.</label>
+                        <input type="text" class="form-control" name="brother_contact_no_<?php echo $k;?>" placeholder="Mobile No." value="<?php echo getFilledDetails($getBrotherDetails[0], 'mobile_no');?>">
                     </div>
                     <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="brother_contact_no[]" placeholder="Mobile No." >
-                    </div>
-                    <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="brother_income[]" placeholder="Total income" >
+                        <label for="email" class="form-label">Total Annual Income</label>
+                        <input type="text" class="form-control" name="brother_income_<?php echo $k;?>" placeholder="Total income" value="<?php echo getFilledDetails($getBrotherDetails[0], 'total_annual_income');?>">
                     </div>
                     <div class="col-md-6 mt-2">
-                        <label for="full_name" class="form-label important-upload">* Upload salary slip / Bank statement - last 1 year bank statement</label>
-                        <input type="file" name="brother_doc[]" class="form-control income-proof" accept=".pdf,.jpg,.png" >
+                        <label for="full_name" class="form-label important-upload">* Upload salary slip / Bank statement - last 6 Month bank statement</label>
+                        <input type="file" name="brother_doc_<?php echo $k;?>" class="form-control income-proof" accept=".pdf,.jpg,.png" >
+                        <?php echo upload_validation_msg();?><br>
+                        <?php echo open_uploaded_file($getBrotherDetails[0],'income_doc','family-details');?>
                         <div class="error"></div>
                     </div>
-                    <div class="col-md-6 mt-2">
-                    <label for="full_name" class="form-label important-upload">* Upload Aadhar Card</label>
-                        <input type="file" name="brother_aadhar[]" class="form-control" accept=".pdf,.jpg,.png" >
-                       
-                    </div>
-                    <div class="col-md-6 mt-2">
-                    <label for="full_name" class="form-label important-upload">* Upload Pancard Card</label>
-                        <input type="file" name="brother_pacard[]" class="form-control" accept=".pdf,.jpg,.png" >
-                       
-                    </div>
+                    
 
                 </div>
                 <hr>
@@ -327,87 +319,71 @@
             <?php }} else { $k = $j;} ?>
             <?php 
             if($getApplicantDetails[0]['no_of_sister'] > 0){
-            for($i=0;$i<$getApplicantDetails[0]['no_of_sister'];$i++){$z =$k+$i+1; ?> 
+            for($i=0;$i<$getApplicantDetails[0]['no_of_sister'];$i++){$z =$i+1; 
+                $getSisterDetails = $db->query("SELECT * FROM $table_family where user_id=$applicationId and relationship_type ='sister' and sister_no = $z");
+                if(empty($getSisterDetails)){
+                    $getSisterDetails[0]=[];
+                  }
+            ?> 
             <div class="family-item mb-3 family-member">
-                <h5>Family Member #<?php echo $k+$i+1;?></h5>
+                <h5>Sister <?php echo $i+1;?> Details:</h5>
                 <div class="row">
                     <div class="col-md-3">
-                        <input type="text" class="form-control" name="family[0][name]" placeholder="Name" >
+                        <label for="email" class="form-label">Name</label>
+                        <input type="text" class="form-control" name="sister_name_<?php echo $z;?>" placeholder="Name" value="<?php echo getFilledDetails($getSisterDetails[0], 'name');?>">
                     </div>
                     <div class="col-md-3">
-                        <select class="form-select" id="dob-month" name="dob-month" disabled="disabled" >
-                           
-                            <option value="sister">Sister</option>
-                        </select>
-                        <!-- <input type="text" class="form-control" name="family[0][relationship]" placeholder="Relationship" > -->
-                    </div>
-
-                    <div class="col-md-3">
-                        <!-- <input type="text" class="form-control" name="family[0][occupation]" placeholder="Occupation" > -->
-                        <select name="sister_occupation_<?php echo $i;?>" class="form-control form-select occupation-select" id="sister_occupation_<?php echo $i;?>" required>
+                    <input type="hidden" value="sister" name="relationship_sister_type">
+                        <label for="email" class="form-label">Occupation</label>
+                        <select name="sister_occupation_<?php echo $z;?>" class="form-control form-select occupation-select" id="sister_occupation_<?php echo $z;?>" >
                            <option value="">Select Occupation</option>
-                            <option value="Government Servant">Government Servant</option>
-                            <option value="Private Employee">Private Employee</option>
-                            <option value="Businessman/Businesswoman">Businessman/Businesswoman</option>
-                            <option value="IT Professional">IT Professional</option>
-                            <option value="Farmer/Agriculturist">Farmer/Agriculturist</option>
-                            <option value="Housewife/Homemaker">Housewife/Homemaker</option>
-                            <option value="Housewife/Homemaker">Housewife/Homemaker</option>
-                            <option value="Researcher">Researcher</option>
-                            <option value="Unemployed">Unemployed</option>
-                            <option value="Retired">Retired</option>
+                           <?php foreach(ALL_OCCUPATION as $occupation):?>
+                                <option value="<?php echo $occupation;?>" <?php echo getFilledDetails($getSisterDetails[0], 'occupation') == $occupation ? 'selected' : ''; ?>><?php echo $occupation;?></option>
+                            <?php endforeach;?> 
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-select education-level-family" id="qualification1" name="sister_qualification[]" required>
-                            <option value="">-- Select Qualification --</option>
-                            <option value="Elementary education">Elementary education</option>
-                            <option value="Secondary Education">Secondary Education</option>
-                            <option value="ITI">ITI</option>
-                            <option value="Diploma/Certificate program">Diploma/Certificate program</option>
-                            <option value="Higher Secondary Education">Higher Secondary Education</option>
-                            <option value="Graduate">Graduate</option>
-                            <option value="Post graduate">Post graduate</option>
-                            <option value="Doctorate">Doctorate</option>
+                        <label for="email" class="form-label">Qualification</label>
+                        <select class="form-select education-level-family" id="sister_qualification_<?php echo $i;?>" name="sister_qualification_<?php echo $z;?>" >
+                            <option value="">Select Qualification</option>
+                            <?php foreach(ALL_QUALIFICATION as $qualification):?>
+                                <option value="<?php echo $qualification;?>"  <?php echo getFilledDetails($getSisterDetails[0], 'qualification') == $qualification ? 'selected' : ''; ?>><?php echo $qualification;?></option>
+                            <?php endforeach;?>
                         </select>
                     </div>
-                    <div class="col-md-4 mt-2">
-                        <select class="form-select" id="maritalStatus" name="sister_maritalStatus[]">
-                            <option value="" selected>--Select Marital Status--</option>
-                            <option value="single">Single</option>
-                            <option value="married">Married</option>
-                            <option value="divorced">Divorced</option>
-                            <option value="widowed">Widowed</option>
-                            <option value="separated">Separated</option>
+                    <div class="col-md-3">
+                        <label for="email" class="form-label">Marital Status</label>
+                        <select class="form-select" id="maritalStatus" name="sister_maritalStatus_<?php echo $z;?>">
+                            <option value="" selected>Select Marital Status</option>
+                            <?php foreach(ALL_MARITAL_STATUS as $marital_status):?>
+                                <option value="<?php echo $marital_status;?>"  <?php echo getFilledDetails($getSisterDetails[0], 'marital_status') == $marital_status ? 'selected' : ''; ?>><?php echo $marital_status;?></option>
+                            <?php endforeach;?>
                         </select>
                     </div>
-                    <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="sister_pancard_no[]" placeholder="Pancard Number" >
+                    <div class="col-md-3">
+                        <label for="email" class="form-label">Pancard No.</label>
+                        <input type="text" class="form-control" name="sister_pancard_no_<?php echo $z;?>" placeholder="Pancard Number" value="<?php echo getFilledDetails($getSisterDetails[0], 'pancard_no');?>">
                     </div>
                     <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="sister_aadhar_no[]" placeholder="Aadhar Card Number" >
+                        <label for="email" class="form-label">Aadhaar Card No.</label>
+                        <input type="text" class="form-control" name="sister_aadhar_no_<?php echo $z;?>" placeholder="Aadhar Card Number" value="<?php echo getFilledDetails($getSisterDetails[0], 'aadhaar_card_no');?>">
                     </div>
                     <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="sister_contact_no[]" placeholder="Mobile No." >
+                        <label for="email" class="form-label">Mobile No.</label>
+                        <input type="text" class="form-control" name="sister_contact_no_<?php echo $z;?>" placeholder="Mobile No." value="<?php echo getFilledDetails($getSisterDetails[0], 'mobile_no');?>">
                     </div>
                     <div class="col-md-4 mt-2">
-                        <input type="text" class="form-control" name="sister_income[]" placeholder="Total income" >
+                        <label for="email" class="form-label">Total Annual Income</label>
+                        <input type="text" class="form-control" name="sister_income_<?php echo $z;?>" placeholder="Total Annual Income" value="<?php echo getFilledDetails($getSisterDetails[0], 'total_annual_income');?>">
                     </div>
                     <div class="col-md-6 mt-2">
-                        <label for="full_name" class="form-label important-upload">* Upload salary slip / Bank statement - last 1 year bank statement</label>
-                        <input type="file" name="sister_doc[]" class="form-control income-proof" accept=".pdf,.jpg,.png" >
+                        <label for="full_name" class="form-label important-upload">* Upload salary slip / Bank statement - last 6 Month bank statement</label>
+                        <input type="file" name="sister_doc_<?php echo $z;?>" class="form-control income-proof" accept=".pdf" >
+                        <?php echo upload_validation_msg();?><br>
+                        <?php echo open_uploaded_file($getSisterDetails[0],'income_doc','family-details');?>
                         <div class="error"></div>
                     </div>
-                    <div class="col-md-6 mt-2">
-                    <label for="full_name" class="form-label important-upload">* Upload Aadhar Card</label>
-                        <input type="file" name="sister_aadhar[]" class="form-control" accept=".pdf,.jpg,.png" >
-                       
-                    </div>
-                    <div class="col-md-6 mt-2">
-                    <label for="full_name" class="form-label important-upload">* Upload Pancard Card</label>
-                        <input type="file" name="sister_pancard[]" class="form-control" accept=".pdf,.jpg,.png" >
-                       
-                    </div>
+                    
 
                 </div>
                 <hr>
@@ -422,62 +398,7 @@
 </div>
 
 <!-- Step 2: Education Details -->
-<div class="card step" id="step3" style="display: none;">
-    <div class="card-header">Step 3: Education Details</div>
-    <div class="card-body">
-        <div id="educationContainer">
-            <div class="education-item mb-3">
-                <h5>Education #1</h5>
-                <div class="row">
-                    <div class="col-md-3">
-                        <select class="form-select education-level-family" id="qualification1" name="qualification[]" >
-                            <option value="">-- Select Qualification --</option>
-                            <option value="10th">10th</option>
-                            <option value="12th">12th</option>
-                            <option value="Engineering">Engineering</option>
-                            <option value="diploma">Diploma</option>
-                            <option value="Graduation">Graduation</option>
-                            <option value="postgraduation">Post-Graduation</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3 graduation-fields" style="display:none;">
-                        <select name="semester[]" class="form-select">
-                            <option value="">Select Semester</option>
-                            <option value="1">1st</option>
-                            <option value="2">2nd</option>
-                            <option value="3">3rd</option>
-                            <option value="4">4th</option>
-                            <option value="5">5th</option>
-                            <option value="6">6th</option>
-                            <option value="7">7th</option>
-                            <option value="8">8th</option>
-                        </select>
-                        <select name="branch[]" class="form-select mt-2">
-                            <option value="">Select Branch</option>
-                            <option value="BTech">BTech</option>
-                            <option value="BE">BE</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <input type="text" class="form-control" name="education[0][institution]" placeholder="Institution" >
-                    </div>
-                    <div class="col-md-2">
-                        <input type="number" class="form-control" name="education[0][year]" placeholder="Year of Passing" >
-                    </div>
-                    <div class="col-md-2">
-                        <input type="number" step="0.01" class="form-control" name="education[0][percentage]" placeholder="Percentage/CGPA" >
-                    </div>
-                    <div class="col-md-6 mt-2">
-                        <input type="file" name="education_certificate[]" class="form-control income-proof" accept=".pdf,.jpg,.png" >
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button type="button" class="btn btn-secondary" id="addEducation">Add More Education</button>
-        <button type="button" class="btn btn-secondary prev">Previous</button>
-        <button type="button" class="btn btn-primary next">Next</button>
-    </div>
-</div>
+
 
 <!-- Step 3: Family Details -->
 

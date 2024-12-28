@@ -72,7 +72,7 @@
                     </ul>
                 </div>
 
-                <div class="widget">
+                <!-- <div class="widget">
                     <div class="footer-subscribe">
                         <h3 class="widget-heading">Subscribe</h3>
                         <form action="forms/newsletter.php" method="post" class="php-email-form">
@@ -90,12 +90,12 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
         <div class="copyright d-flex flex-column flex-md-row align-items-center justify-content-md-between">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">Active.</strong> <span>All Rights Reserved</span></p>
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">SVTC.</strong> <span>All Rights Reserved</span></p>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
                 <!-- You can delete the links only if you've purchased the pro version. -->
@@ -145,7 +145,11 @@ $(document).ready(function(){
   });
   $('#closeModal').click(function() {
                 $('#registrationModal').modal('hide'); // Use Bootstrap's modal method
+                $("#forgotPasswordModal").modal('hide');
             });
+});
+$(".forgotBtn").click(function(){
+    $("#forgotPasswordModal").modal('show');
 });
 </script>
 

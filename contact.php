@@ -30,7 +30,7 @@ include_once 'includes/header.php';
 
         <div class="row gy-5 gx-lg-5">
 
-          <div class="col-lg-4">
+          <div class="col-lg-12">
 
             <div class="info">
               <h3>Get in touch</h3>
@@ -67,7 +67,7 @@ include_once 'includes/header.php';
 
           </div>
 
-          <div class="col-lg-8">
+          <div class="col-lg-8 display-none" >
             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="row">
                 <div class="col-md-6 form-group">

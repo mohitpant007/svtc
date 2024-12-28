@@ -1,6 +1,7 @@
 $(document).ready(function () {
     let educationCount = 1;
     let familyCount = 2;
+    const single_parent= "";
     $(".first-form").click(function () {
         $("#studentForm").validate({
             rules: {
@@ -25,14 +26,17 @@ $(document).ready(function () {
                 error.insertAfter(element);
             },
             submitHandler: function(form) {
-                const formData = $(form).serialize();
+                const formData = new FormData(form); 
+                formData.append('action', 'basic_details'); 
                 $.ajax({
                     url: "includes/schollarship_common_function.php", // Replace with your URL
                     type: "POST", // Change to POST if needed
                     beforeSend: function () {
                       $("#form-loader").show(); // Show loader
                     },
-                    data:{'action':'basic_details','formdata':formData},
+                    data:formData,
+                    contentType: false, 
+                    processData: false,
                     success: function (response) {
                         var ajaxResonse = JSON.parse(response);
                         if (ajaxResonse.status == true) {
@@ -83,14 +87,17 @@ $(document).ready(function () {
                 error.insertAfter(element);
             },
             submitHandler: function(form) {
-                const formData = $(form).serialize();
+                const formData = new FormData(form); 
+                formData.append('action', 'family_details'); 
                 $.ajax({
                     url: "includes/schollarship_common_function.php", // Replace with your URL
                     type: "POST", // Change to POST if needed
                     beforeSend: function () {
                       $("#form-loader").show(); // Show loader
                     },
-                    data:{'action':'basic_details','formdata':formData},
+                    data:formData,
+                    contentType: false, 
+                    processData: false,
                     success: function (response) {
                         var ajaxResonse = JSON.parse(response);
                         if (ajaxResonse.status == true) {
@@ -99,7 +106,7 @@ $(document).ready(function () {
                                 content: 'Successfully Saved! ',
                                 buttons:{
                                     ok: function () {
-                                        window.location.href = BASE_URL+"scholarship-apply-form-step-2";
+                                        window.location.href = BASE_URL+"scholarship-apply-form-step-3";
                                     }
                                 }
                             });
@@ -482,9 +489,17 @@ $(document).ready(function () {
     $('#addFileSection').click(function () {
         const fileSection = `
         <div class="mb-3">
-            <input type="file" class="form-control" id="file${fileIndex}" name="files[]">
+            <input type="file" class="form-control mt-2" id="file${fileIndex}" name="files[]">
         </div>`;
         $('#fileUploadContainer').append(fileSection);
+        fileIndex++;
+    });
+    $('#addFileSection_1').click(function () {
+        const fileSection = `
+        <div class="mb-3">
+            <input type="file" class="form-control mt-2" id="file${fileIndex}" name="files[]">
+        </div>`;
+        $('#fileUploadContainer_1').append(fileSection);
         fileIndex++;
     });
     let educationfileIndex = 2; // Start with the next index after the first file input
@@ -531,14 +546,14 @@ $(document).ready(function () {
         $('#single-parent').change(function () {
             if ($(this).is(':checked')) {
                 $('#sigle_parent_details').show(); // Show the div
-                $('#mother_name').val('');
-                $('#father_name').val('');
+                //$('#mother_name').val('');
+                //$('#father_name').val('');
                 $('#father_details').hide();
                 $('#mother_details').hide();
             } else {
                 $('#sigle_parent_details').hide(); // Show the div
-                $('#parent_relation').val('');
-                $('#single_parent_name').val('');
+                //$('#parent_relation').val('');
+                //$('#single_parent_name').val('');
                 $('#father_details').show();
                 $('#mother_details').show();
             }
@@ -549,6 +564,14 @@ $(document).ready(function () {
                $('#permanent_address').val(current_address);
             } else {
                 $('#permanent_address').val('');
+            }
+        });  
+        
+        $('#staying_in_hostel').change(function () {
+            if ($(this).is(':checked')) {
+               $('#hostel_pg_address_div').show();
+            } else {
+                $('#hostel_pg_address_div').hide();
             }
         });  
         
@@ -565,6 +588,11 @@ $(document).ready(function () {
                 $('#father_details').show();
                 $('#mother_details').show();
         }
+        if(typeof is_pg_hostel!="undefined" && is_pg_hostel == '1'){
+            $('#hostel_pg_address_div').show();
+        }else{
+            $('#hostel_pg_address_div').hide();
+        }
         $("#datepicker").datepicker({
             dateFormat: "yy-mm-dd", // Format to match PHP's date
             changeMonth: true,      // Enable month dropdown
@@ -574,4 +602,53 @@ $(document).ready(function () {
           $("#open-calendar").on("click", function () {
             $("#datepicker").datepicker("show");
           });
+          $('.uplooad-file').on('change', function () {
+            var file = this.files[0]; // Get the selected file
+            var validExtensions = ['image/jpeg', 'image/jpg', 'image/png']; // Allowed MIME types
+    
+            if (file) {
+                if (validExtensions.includes(file.type)) {
+                    $('#fileError').hide(); // Hide error message if valid
+                } else {
+                    $(this).val(''); // Reset the file input
+                    jQuery.confirm({
+                        title: 'Alert',
+                        type: 'red',
+                        content: 'Upload a valid image only! Allowed extension (.png, .jpeg, .jpg)',
+                        buttons:{
+                            ok: function () {
+                                //location.reload();
+                            }
+                        }
+                        
+                    });
+                    
+                }
+            }
+        });
+
+        $('.salary-upload').on('change', function () {
+            var file = this.files[0]; // Get the selected file
+            var validExtensions = ['application/pdf']; // Allowed MIME types
+    
+            if (file) {
+                if (validExtensions.includes(file.type)) {
+                    $('#fileError').hide(); // Hide error message if valid
+                } else {
+                    $(this).val(''); // Reset the file input
+                    jQuery.confirm({
+                        title: 'Alert',
+                        type: 'red',
+                        content: 'Upload a valid image only! Allowed extension (.pdf)',
+                        buttons:{
+                            ok: function () {
+                                //location.reload();
+                            }
+                        }
+                        
+                    });
+                    
+                }
+            }
+        });
 });

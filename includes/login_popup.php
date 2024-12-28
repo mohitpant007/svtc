@@ -33,3 +33,25 @@
             </div>
         </div>
     </div>
+
+    <!---------------------forgot password popup------------------------------------------------>
+    <div class="modal fade bd-example-modal-lg" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registrationModalLabel">Forgot Password</h5>
+                    <button type="button" id="closeModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form id="registrationForm" method="POST" >
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Enter Email Id</label>
+                            <input type="text" class="form-control" name="email_id" id="email_id" placeholder="Enter your registered email id" required>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-success w-100 login-button">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -67,8 +67,10 @@ session_start();
           ?>">About</a></li>
           <li><a href="contact" class="<?php echo $current_page == "contact.php"?"active":""
           ?>">Contact</a></li>
+          <?php if(isset($_SESSION['svtc_user_login']) && $_SESSION['svtc_user_login'] == 1){?>
           <li><a href="application-status" class="<?php echo $current_page == "application-status.php"?"active":""
           ?>">Application Status</a></li>
+          <?php  } ?>
           <li><a href="donate" class="<?php echo $current_page == "donate.php"?"active":""
           ?>">Donate</a></li>
           <!-- <li><a href="#" class="loginBtn">Sigin <i class="fa fa-sign-in" aria-hidden="true"></i></a></li> -->
